@@ -1,0 +1,29 @@
+.sliderIpssi{
+  overflow:hidden;
+  position:relative;
+}
+
+.sliderIpssiContainer{
+  display:flex;
+  transition: all ease-in 0.25s;
+}
+
+.nextSlide, .prevSlide{
+  position:absolute;
+  width:50px;
+  padding:10px 0px;
+  text-align: center;
+  background: rgba(255,255,255,0.5);
+  font-size:30px;
+  font-weight:bold;
+  cursor:pointer;
+  top:50%;
+}
+
+.nextSlide{
+  right:20px;
+}
+
+.prevSlide{
+  left:20px;
+}
