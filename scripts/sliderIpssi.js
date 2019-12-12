@@ -3,6 +3,8 @@ const sliderImages = sliderIpssi.querySelectorAll('img')
 const sliderIpssiContainer =document.createElement('div')
 const sliderNext = document.createElement('div')
 const sliderPrev = document.createElement('div')
+const sliderPagination = document.createElement('div')
+
 let currentPosition = 0
 
 sliderIpssiContainer.classList.add('sliderIpssiContainer')
@@ -26,8 +28,9 @@ sliderNext.addEventListener(
   'click',
   function()
   {
-    currentPosition++
-    sliderIpssiContainer.style.transform='translateX('+(currentPosition * -960)+'px)'
+    currentPosition = (currentPosition+1) % sliderImages.length
+    console.log(currentPosition)
+    setSliderPosition(currentPosition)
   }
 )
 
@@ -36,6 +39,48 @@ sliderPrev.addEventListener(
   function()
   {
     currentPosition--
-    sliderIpssiContainer.style.transform='translateX('+(currentPosition * -960)+'px)'
+    if(currentPosition<0)
+    {
+      currentPosition = sliderImages.length - 1
+    }
+    console.log(currentPosition)
+    setSliderPosition(currentPosition)
   }
 )
+
+
+sliderPagination.classList.add('sliderPagination')
+sliderIpssi.appendChild(sliderPagination)
+
+for(let i=0; i<sliderImages.length;i++)
+{
+  let sliderDot = document.createElement('div')
+  sliderDot.classList.add('dot')
+  sliderDot.classList.add('dot-'+i)
+  sliderDot.setAttribute('data-position',i)
+  sliderPagination.appendChild(sliderDot)
+
+  sliderDot.addEventListener(
+    'click',
+    function()
+    {
+      currentPosition = sliderDot.getAttribute('data-position')
+      setSliderPosition(currentPosition)
+      console.log(currentPosition)
+    }
+  )
+
+}
+
+function setSliderPosition(position)
+{
+  let pastDot = document.querySelector('.dot.current')
+  if(pastDot != null)
+  {
+    pastDot.classList.remove('current')
+  }
+
+  sliderIpssiContainer.style.transform='translateX('+(position * -960)+'px)'
+  let currentDot = document.querySelector('.dot-'+position);
+  currentDot.classList.add('current')
+}

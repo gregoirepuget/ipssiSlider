@@ -27,3 +27,25 @@
 .prevSlide{
   left:20px;
 }
+
+.sliderPagination{
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform: translateX(-50%);
+}
+
+.dot{
+  width:15px;
+  height:15px;
+  border-radius:50%;
+  background:#FFF;
+  display: inline-block;
+  margin:5px;
+  transition:background ease-in 0.4s;
+  cursor:pointer;
+}
+
+.dot.current{
+  background:#000;
+}
